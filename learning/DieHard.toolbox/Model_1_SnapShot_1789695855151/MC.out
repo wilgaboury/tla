@@ -1,0 +1,38 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 5 and seed -3134453844208259486 with 6 workers on 12 cores with 1211MB heap and 2721MB offheap memory [pid: 23672] (Windows 10 10.0 amd64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\wgabo\Code\tla\DieHard.toolbox\Model_1\MC.tla
+Parsing file C:\Users\wgabo\Code\tla\DieHard.toolbox\Model_1\DieHard.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\Integers.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module DieHard
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2026-09-17 21:43:47)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2026-09-17 21:43:48.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(320041) at 2026-09-17 21:43:51: 13,811,813 states generated (13,811,813 s/min), 2,301,825 distinct states found (2,301,825 ds/min), 2 states left on queue.
+@!@!@ENDMSG 2200 @!@!@

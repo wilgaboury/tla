@@ -1,0 +1,309 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 130 and seed 2218024226039509987 with 6 workers on 12 cores with 1211MB heap and 2721MB offheap memory [pid: 20680] (Windows 10 10.0 amd64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\wgabo\Code\tla\MyTwoPhase.toolbox\Model_1\MC.tla
+Parsing file C:\Users\wgabo\Code\tla\MyTwoPhase.toolbox\Model_1\MyTwoPhase.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\wgabo\AppData\Local\Programs\TLAToolbox-1.7.4\plugins\org.lamport.tlatools_1.0.0.202408081326\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module MyTwoPhase
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2026-09-19 11:38:05)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2026-09-19 11:38:05.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2110:1 @!@!@
+Invariant TPTypeOK is violated.
+@!@!@ENDMSG 2110 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ msgs = {}
+/\ rmState = [r1 |-> "working", r2 |-> "working", r3 |-> "working"]
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <RMPrepare line 97, col 5 to line 100, col 40 of module MyTwoPhase>
+/\ msgs = {[type |-> "Prepared", rm |-> "r1"]}
+/\ rmState = [r1 |-> "prepared", r2 |-> "working", r3 |-> "working"]
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+3: <TMRcvPrepared line 78, col 3 to line 81, col 41 of module MyTwoPhase>
+/\ msgs = {[type |-> "Prepared", rm |-> "r1"]}
+/\ rmState = [r1 |-> "prepared", r2 |-> "working", r3 |-> "working"]
+/\ tmState = "init"
+/\ tmPrepared = {"r1"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+4: <RMPrepare line 97, col 5 to line 100, col 40 of module MyTwoPhase>
+/\ msgs = {[type |-> "Prepared", rm |-> "r1"], [type |-> "Prepared", rm |-> "r2"]}
+/\ rmState = [r1 |-> "prepared", r2 |-> "prepared", r3 |-> "working"]
+/\ tmState = "init"
+/\ tmPrepared = {"r1"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+5: <RMPrepare line 97, col 5 to line 100, col 40 of module MyTwoPhase>
+/\ msgs = { [type |-> "Prepared", rm |-> "r1"],
+  [type |-> "Prepared", rm |-> "r2"],
+  [type |-> "Prepared", rm |-> "r3"] }
+/\ rmState = [r1 |-> "prepared", r2 |-> "prepared", r3 |-> "prepared"]
+/\ tmState = "init"
+/\ tmPrepared = {"r1"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+6: <TMRcvPrepared line 78, col 3 to line 81, col 41 of module MyTwoPhase>
+/\ msgs = { [type |-> "Prepared", rm |-> "r1"],
+  [type |-> "Prepared", rm |-> "r2"],
+  [type |-> "Prepared", rm |-> "r3"] }
+/\ rmState = [r1 |-> "prepared", r2 |-> "prepared", r3 |-> "prepared"]
+/\ tmState = "init"
+/\ tmPrepared = {"r1", "r2"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+7: <TMRcvPrepared line 78, col 3 to line 81, col 41 of module MyTwoPhase>
+/\ msgs = { [type |-> "Prepared", rm |-> "r1"],
+  [type |-> "Prepared", rm |-> "r2"],
+  [type |-> "Prepared", rm |-> "r3"] }
+/\ rmState = [r1 |-> "prepared", r2 |-> "prepared", r3 |-> "prepared"]
+/\ tmState = "init"
+/\ tmPrepared = {"r1", "r2", "r3"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+8: <TMCommit line 84, col 5 to line 88, col 40 of module MyTwoPhase>
+/\ msgs = { [type |-> "Commit"],
+  [type |-> "Prepared", rm |-> "r1"],
+  [type |-> "Prepared", rm |-> "r2"],
+  [type |-> "Prepared", rm |-> "r3"] }
+/\ rmState = [r1 |-> "prepared", r2 |-> "prepared", r3 |-> "prepared"]
+/\ tmState = "done"
+/\ tmPrepared = {"r1", "r2", "r3"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+9: <RMRcvCommitMsg line 108, col 5 to line 110, col 46 of module MyTwoPhase>
+/\ msgs = { [type |-> "Commit"],
+  [type |-> "Prepared", rm |-> "r1"],
+  [type |-> "Prepared", rm |-> "r2"],
+  [type |-> "Prepared", rm |-> "r3"] }
+/\ rmState = [r1 |-> "commited", r2 |-> "prepared", r3 |-> "prepared"]
+/\ tmState = "done"
+/\ tmPrepared = {"r1", "r2", "r3"}
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2026-09-19 11:38:05
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2773:0 @!@!@
+<TPInit line 57, col 1 to line 57, col 6 of module MyTwoPhase>: 2:2
+@!@!@ENDMSG 2773 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 61, col 3 to line 64, col 14 of module MyTwoPhase: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<TMRcvPrepared line 70, col 1 to line 70, col 16 of module MyTwoPhase>: 22:105
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 78, col 6 to line 78, col 21 of module MyTwoPhase: 959
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 78, col 6 to line 78, col 12 of module MyTwoPhase: 854
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 79, col 6 to line 79, col 45 of module MyTwoPhase: 309
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 79, col 6 to line 79, col 36 of module MyTwoPhase: 204
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 79, col 42 to line 79, col 45 of module MyTwoPhase: 204
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 80, col 6 to line 80, col 40 of module MyTwoPhase: 105
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 81, col 6 to line 81, col 41 of module MyTwoPhase: 105
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<TMCommit line 83, col 1 to line 83, col 8 of module MyTwoPhase>: 1:2
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 84, col 8 to line 84, col 23 of module MyTwoPhase: 291
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 84, col 8 to line 84, col 14 of module MyTwoPhase: 289
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 8 to line 85, col 22 of module MyTwoPhase: 73
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 85, col 8 to line 85, col 17 of module MyTwoPhase: 71
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 85, col 21 to line 85, col 22 of module MyTwoPhase: 71
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 86, col 8 to line 86, col 24 of module MyTwoPhase: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 87, col 8 to line 87, col 48 of module MyTwoPhase: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 88, col 8 to line 88, col 40 of module MyTwoPhase: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<TMAbort line 90, col 1 to line 90, col 7 of module MyTwoPhase>: 27:70
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 91, col 8 to line 91, col 23 of module MyTwoPhase: 358
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 91, col 8 to line 91, col 14 of module MyTwoPhase: 288
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 92, col 8 to line 92, col 24 of module MyTwoPhase: 70
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 93, col 8 to line 93, col 47 of module MyTwoPhase: 70
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 94, col 8 to line 94, col 40 of module MyTwoPhase: 70
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<RMPrepare line 96, col 1 to line 96, col 12 of module MyTwoPhase>: 54:159
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 97, col 8 to line 97, col 29 of module MyTwoPhase: 1010
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 97, col 8 to line 97, col 17 of module MyTwoPhase: 851
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 98, col 8 to line 98, col 52 of module MyTwoPhase: 159
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 99, col 8 to line 99, col 60 of module MyTwoPhase: 159
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 100, col 8 to line 100, col 40 of module MyTwoPhase: 159
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<RMChooseToAbort line 102, col 1 to line 102, col 18 of module MyTwoPhase>: 57:156
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 103, col 8 to line 103, col 29 of module MyTwoPhase: 1004
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 103, col 8 to line 103, col 17 of module MyTwoPhase: 848
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 104, col 8 to line 104, col 51 of module MyTwoPhase: 156
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 105, col 8 to line 105, col 46 of module MyTwoPhase: 156
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<RMRcvCommitMsg line 107, col 1 to line 107, col 17 of module MyTwoPhase>: 1:2
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 108, col 8 to line 108, col 35 of module MyTwoPhase: 849
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 8 to line 108, col 26 of module MyTwoPhase: 848
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 32 to line 108, col 35 of module MyTwoPhase: 848
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 109, col 8 to line 109, col 52 of module MyTwoPhase: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 19 to line 109, col 52 of module MyTwoPhase: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 110, col 8 to line 110, col 46 of module MyTwoPhase: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<RMRcvAbortMsg line 112, col 1 to line 112, col 16 of module MyTwoPhase>: 119:648
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 113, col 8 to line 113, col 34 of module MyTwoPhase: 1494
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 113, col 8 to line 113, col 25 of module MyTwoPhase: 846
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 113, col 31 to line 113, col 34 of module MyTwoPhase: 846
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 114, col 8 to line 114, col 51 of module MyTwoPhase: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 115, col 8 to line 115, col 46 of module MyTwoPhase: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<TPTypeOK line 48, col 1 to line 48, col 8 of module MyTwoPhase>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 52, col 3 to line 55, col 28 of module MyTwoPhase: 282
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 52, col 6 to line 52, col 72 of module MyTwoPhase: 282
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 53, col 6 to line 53, col 33 of module MyTwoPhase: 281
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 54, col 6 to line 54, col 28 of module MyTwoPhase: 281
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 55, col 6 to line 55, col 28 of module MyTwoPhase: 281
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(11) at 2026-09-19 11:38:05: 1,123 states generated (67,991 s/min), 282 distinct states found (17,073 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+1123 states generated, 282 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 11.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 7 and the 95th percentile is 3).
+@!@!@ENDMSG 2268 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 991ms at (2026-09-19 11:38:05)
+@!@!@ENDMSG 2186 @!@!@
