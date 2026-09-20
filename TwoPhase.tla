@@ -40,7 +40,7 @@ Messages ==
   (* The set of all possible messages.  Messages of type "Prepared" are    *)
   (* sent from the RM indicated by the message's rm field to the TM.       *)
   (* Messages of type "Commit" and "Abort" are broadcast by the TM, to be  *)
-  (* received by all RMs.  The set msgs contains just a single copy of     *)
+  (* received by all RMs.  The set msgs co1ntains just a single copy of     *)
   (* such a message.                                                       *)
   (*************************************************************************)
   [type : {"Prepared"}, rm : RM]  \cup  [type : {"Commit", "Abort"}]
@@ -178,5 +178,5 @@ THEOREM TPSpec => TCSpec
 
 =============================================================================
 \* Modification History
-\* Last modified Sat Sep 19 09:22:34 EDT 2026 by wgabo
+\* Last modified Sun Sep 20 16:25:24 EDT 2026 by wgabo
 \* Created Fri Sep 18 23:42:07 EDT 2026 by wgabo

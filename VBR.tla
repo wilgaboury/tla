@@ -9,28 +9,43 @@
 
 EXTENDS Naturals, FiniteSets
 
-CONSTANT B \* blocks
-CONSTANT R \* replicas
-CONSTANT C \* clients
+CONSTANT 
+    NumBlocks,
+    NumReplicas,
+    ClientCmds,
+    ViewChangeQuorum
+
+ASSUME 
+    /\ NumReplicas > 0
+    /\ ViewChangeQuorum > 0
+    /\ ViewChangeQuorum <= NumReplicas
+
+B == 0..NumBlocks
+R == 0..NumReplicas
+NormalQuorum == 1 + NumReplicas - ViewChangeQuorum
 
 VARIABLES
     replicaState,
     clientState,
     msgs
+    
+vars == << replicaState, clientState, msgs >>
 
 BlockState == [B -> [view: Nat, generation: Nat, value: Nat, storage: {"valid", "corrupt"}]]
-ClientTable == [C -> Nat]
-ReplicaState == [R -> [view: Nat, blockState: BlockState, clientTable: ClientTable]]
-ClientState == [C -> Nat]
+ReplicaStatus == {"view_change", "normal"}
+ReplicaState == [R -> [view: Nat, status: ReplicaStatus, blockState: BlockState]]
+Messages == [type: "Message"]
 
 TypeOK ==
     /\ replicaState \in ReplicaState
-    /\ msgs = {}
+    /\ msgs \in Messages
 
 blockStateInit == [b \in B |-> [view |-> 0, generation |-> 0, value |-> 0, storage |-> "valid"]]
+replicaStateInit == [r \in R |-> [view: 0, blockState: blockStateInit]]
 
 Init ==
-    /\ replicaState = [r \in R |-> [view: 0, blockState: blockStateInit]]
+    /\ replicaState = replicaStateInit
+    /\ msgs = {}
 
 CeilDiv(a, b) == IF a % b = 0 THEN a \div b ELSE (a \div b) + 1
 
@@ -43,10 +58,13 @@ CorruptSpecificBlock(r, b) ==
     /\ replicaState' = [replicaState EXCEPT !.blockState[b].storage = "corrupt"]
     /\ UNCHANGED <<clientState, msgs>>
     
-CorruptBlock == \E r \in R, b \in B : CorruptSpecificBlock(r, b) 
+CorruptBlock == \E r \in R, b \in B : CorruptSpecificBlock(r, b)
+
+Next == 
+    \/ CorruptBlock
 
 
 =============================================================================
 \* Modification History
-\* Last modified Sun Sep 20 10:27:51 EDT 2026 by wgabo
+\* Last modified Sun Sep 20 18:00:42 EDT 2026 by wgabo
 \* Created Sat Sep 19 09:24:55 EDT 2026 by wgabo

@@ -60,13 +60,13 @@ Inv == (AVar[2] = BVar[2]) => (AVar = BVar)
 (* steps.                                                                  *)
 (***************************************************************************)
 FairSpec == Spec /\ WF_vars(Next)
-FairSpecAB == Spec /\ WF_vars(A) /\ WF_vars(B)
 
-THEOREM FairSpec => FairSpecAB
+FairSpecNext == Spec /\ WF_vars(Next)
+FairSpecAB == Spec /\ WF_vars(A) /\ WF_vars(B)
 
 =============================================================================
 \* Modification History
-\* Last modified Sun Sep 20 15:15:56 EDT 2026 by wgabo
+\* Last modified Sun Sep 20 14:38:16 EDT 2026 by wgabo
 \* Last modified Wed Oct 18 04:07:37 PDT 2017 by lamport
 \* Created Fri Sep 04 07:08:22 PDT 2015 by lamport
 
