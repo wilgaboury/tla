@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TwoPhase</name>
+	<name>MyTwoPhase</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,14 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>TCommit.tla</name>
+			<name>MyTwoPhase.tla</name>
 			<type>1</type>
-			<location>C:/Users/wgabo/Code/tla/TCommit.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/MyTwoPhase.tla</locationURI>
 		</link>
 		<link>
-			<name>TwoPhase.tla</name>
+			<name>TCommit.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TwoPhase.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TCommit.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
