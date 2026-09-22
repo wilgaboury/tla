@@ -11,9 +11,9 @@ EXTENDS Naturals, FiniteSets
 
 CONSTANT
     NumBlocks,
-    Values,
     NumReplicas,
-    ViewChangeQuorum
+    ViewChangeQuorum,
+    MaxViewChanges
 
 ASSUME 
     /\ NumReplicas > 0
@@ -23,17 +23,23 @@ ASSUME
 B == 0..NumBlocks
 R == 0..NumReplicas
 NormalQuorum == 1 + NumReplicas - ViewChangeQuorum
+Val == 0..NumReplicas
 
 VARIABLES
     replicaState,
-    msgs
+    msgs,
+    viewChanges
     
-vars == << replicaState, msgs >>
+vars == << replicaState, msgs, viewChanges >>
 
-BlockState == [B -> [gen: Nat, value: Values, storage: {"valid", "corrupt"}]]
-ReplicaStatus == {"view_change", "normal"}
+BlockState == [B -> [gen: Nat, value: Val, storage: {"valid", "corrupt"}]]
+ReplicaStatus == {"normal", "start_view_change", "do_view_change"}
 ReplicaState == [R -> [view: Nat, status: ReplicaStatus, blockState: BlockState]]
 Messages == SUBSET (UNION {[
+        type: {"START-VIEW-CHANGE"},
+        source: R,
+        view: Nat
+    ],[
         type: {"RECOVER"},
         source: R,
         block: B
@@ -43,7 +49,7 @@ Messages == SUBSET (UNION {[
         dst: R,
         view: Nat,
         gen: Nat,
-        value: Values
+        value: Val
     ]})
 
 TypeOK ==
@@ -51,11 +57,12 @@ TypeOK ==
     /\ msgs \in Messages
 
 blockStateInit == [b \in B |-> [generation |-> 0, value |-> 0, storage |-> "valid"]]
-replicaStateInit == [r \in R |-> [view: 0, blockState: blockStateInit]]
+replicaStateInit == [r \in R |-> [view |-> 0, status |-> "normal", blockState |-> blockStateInit]]
 
 Init ==
     /\ replicaState = replicaStateInit
     /\ msgs = {}
+    /\ viewChanges = 0
 
 CeilDiv(a, b) == IF a % b = 0 THEN a \div b ELSE (a \div b) + 1
 
@@ -66,14 +73,14 @@ CorruptSpecificBlock(r, b) ==
 (***************************************************************************)
     /\ Cardinality({rr \in R \ {r} : rr.blockState[b].storage = "valid"}) > 1 \* TODO: need to make sure we are not corrupting all max gen blocks
     /\ replicaState' = [replicaState EXCEPT !.blockState[b].storage = "corrupt"]
-    /\ UNCHANGED << msgs >>
+    /\ UNCHANGED << msgs, viewChanges >>
     
 CorruptBlock == \E r \in R, b \in B : CorruptSpecificBlock(r, b)
 
 SendBlockRecover(r, b) ==
     /\ replicaState[r].blockState[b].storage = "corrupt"
     /\ msgs' = msgs \union {[ type |-> "RECOVER", source |-> r, block |-> b ]}
-    /\ UNCHANGED << replicaState >>
+    /\ UNCHANGED << replicaState, viewChanges >>
 
 StartBlockRecover == \E r \in R, b \in B : SendBlockRecover(r, b)
 
@@ -92,13 +99,19 @@ SendBlockRecoverOk(r, b) ==
 
 StartBlockRecoverOk == \E r \in R, b \in B : SendBlockRecoverOk(r, b)
 
-\*StartViewChange ==
+StartViewChange ==
+    /\ viewChanges < MaxViewChanges
+    /\ \E r \in R :
+        /\ replicaState' = [ replicaState EXCEPT !.status = "start-view-change" ]       
+        /\ msgs' = msgs \union {[ type |-> "START-VIEW-CHANGE", source |-> r, view |-> replicaState[r].view ]}
+        /\ UNCHANGED << viewChanges >>
 
 Next == 
     \/ CorruptBlock
+    \/ StartViewChange
 
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Sep 21 07:27:36 EDT 2026 by wgabo
+\* Last modified Mon Sep 21 23:33:56 EDT 2026 by wgabo
 \* Created Sat Sep 19 09:24:55 EDT 2026 by wgabo
