@@ -27,10 +27,9 @@ Val == 0..NumReplicas
 
 VARIABLES
     replicaState,
-    msgs,
-    viewChanges
+    msgs
     
-vars == << replicaState, msgs, viewChanges >>
+vars == << replicaState, msgs >>
 
 BlockState == [B -> [gen: Nat, value: Val, storage: {"valid", "corrupt"}]]
 ReplicaStatus == {"normal", "start_view_change", "do_view_change"}
@@ -62,7 +61,6 @@ replicaStateInit == [r \in R |-> [view |-> 0, status |-> "normal", blockState |-
 Init ==
     /\ replicaState = replicaStateInit
     /\ msgs = {}
-    /\ viewChanges = 0
 
 CeilDiv(a, b) == IF a % b = 0 THEN a \div b ELSE (a \div b) + 1
 
@@ -73,14 +71,14 @@ CorruptSpecificBlock(r, b) ==
 (***************************************************************************)
     /\ Cardinality({rr \in R \ {r} : rr.blockState[b].storage = "valid"}) > 1 \* TODO: need to make sure we are not corrupting all max gen blocks
     /\ replicaState' = [replicaState EXCEPT !.blockState[b].storage = "corrupt"]
-    /\ UNCHANGED << msgs, viewChanges >>
+    /\ UNCHANGED << msgs >>
     
 CorruptBlock == \E r \in R, b \in B : CorruptSpecificBlock(r, b)
 
 SendBlockRecover(r, b) ==
     /\ replicaState[r].blockState[b].storage = "corrupt"
     /\ msgs' = msgs \union {[ type |-> "RECOVER", source |-> r, block |-> b ]}
-    /\ UNCHANGED << replicaState, viewChanges >>
+    /\ UNCHANGED << replicaState >>
 
 StartBlockRecover == \E r \in R, b \in B : SendBlockRecover(r, b)
 
@@ -99,12 +97,22 @@ SendBlockRecoverOk(r, b) ==
 
 StartBlockRecoverOk == \E r \in R, b \in B : SendBlockRecoverOk(r, b)
 
-StartViewChange ==
-    /\ viewChanges < MaxViewChanges
-    /\ \E r \in R :
-        /\ replicaState' = [ replicaState EXCEPT !.status = "start-view-change" ]       
-        /\ msgs' = msgs \union {[ type |-> "START-VIEW-CHANGE", source |-> r, view |-> replicaState[r].view ]}
-        /\ UNCHANGED << viewChanges >>
+canStartViewChange(r) ==
+    LET 
+        startViewChangeMsgs == { m \in msgs : m.type = "START-VIEW-CHANGE" /\ m.source = r }
+        maxStartViewChangeView == IF Cardinality(startViewChangeMsgs) > 0
+            THEN (CHOOSE x \in startViewChangeMsgs : \A y \in startViewChangeMsgs : x.view >= y.view).view
+            ELSE 0
+    IN
+        /\ (replicaState[r].status = "normal" \/ replicaState[r].status = "start-view-change")
+        /\ maxStartViewChangeView < MaxViewChanges
+
+StartViewChange == \E r \in R :
+    /\ canStartViewChange(r)
+    /\ replicaState' = [ replicaState EXCEPT 
+        ![r].status = "start-view-change",
+        ![r].view = replicaState[r].view + 1 ]
+    /\ msgs' = msgs \union {[ type |-> "START-VIEW-CHANGE", source |-> r, view |-> replicaState[r].view ]}
 
 Next == 
     \/ CorruptBlock
@@ -113,5 +121,5 @@ Next ==
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Sep 21 23:33:56 EDT 2026 by wgabo
+\* Last modified Tue Sep 22 07:26:58 EDT 2026 by wgabo
 \* Created Sat Sep 19 09:24:55 EDT 2026 by wgabo
